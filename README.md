@@ -30,8 +30,8 @@
 
 ## 📅 Časový harmonogram
 * **1. Fáze (do 15. 3. 2026):** Dokumentace, funkční požadavky a návrh UI.
-* **2. Fáze (do 22. 3. 2026):** Implementace logiky a práce s daty.
-* **3. Fáze (do 29. 3. 2026):** Grafické rozhraní ve WPF, testování a nápověda.
+* **2. Fáze (do 22. 3. 2026):** Grafické rozhraní ve WPF, testování a nápověda.
+* **3. Fáze (do 29. 3. 2026):** Implementace logiky a práce s daty.
 * **4. Fáze (do 5. 4. 2026):** Finalizace logiky, dokumentace a příprava na obhajobu.
 
 ---
