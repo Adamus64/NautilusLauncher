@@ -7,6 +7,23 @@
         mc:Ignorable="d"
         Title="Login" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
+
+            <TextBlock Text="Nautilus Launcher" FontSize="24" FontWeight="Bold" 
+                       HorizontalAlignment="Center" Margin="0,0,0,30"/>
+
+            <Label Content="Uživatelské jméno:" FontWeight="SemiBold"/>
+            <TextBox x:Name="txtUsername" Margin="0,0,0,15" Padding="5" FontSize="14"/>
+
+            <Label Content="Heslo:" FontWeight="SemiBold"/>
+            <PasswordBox x:Name="txtPassword" Margin="0,0,0,10" Padding="5" FontSize="14"/>
+
+            <TextBlock x:Name="txtErrorMessage" Text="Špatné jméno nebo heslo!" 
+                       Foreground="Red" Visibility="Collapsed" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+
+            <Button x:Name="btnLogin" Content="Přihlásit se" Height="35" FontSize="14" 
+                    FontWeight="Bold" Background="#FF0078D7" Foreground="White" 
+                    BorderThickness="0" Cursor="Hand" Click="BtnLogin_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
