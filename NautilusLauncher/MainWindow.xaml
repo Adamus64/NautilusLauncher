@@ -1,65 +1,67 @@
 ﻿<Window x:Class="NautilusLauncher.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NautilusLauncher"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top" Background="#FFF0F0F0" Padding="3">
-            <MenuItem Header="_Soubor">
-                <MenuItem x:Name="menuAddApp" Header="Přidat aplikaci (.exe)" Click="MenuAddApp_Click"/>
+        Title="Nautilus Launcher" Height="500" Width="900"
+        WindowStartupLocation="CenterScreen" Background="#FFF5F5F7">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="2" Padding="3">
+            <MenuItem Header="Soubor">
+                <MenuItem Header="Přidat aplikaci" Click="MenuAddApp_Click"/>
                 <Separator/>
-                <MenuItem x:Name="menuExit" Header="Ukončit" Click="MenuExit_Click"/>
+                <MenuItem Header="Ukončit" Click="MenuExit_Click"/>
             </MenuItem>
-            <MenuItem Header="_Nastavení">
-                <MenuItem x:Name="menuChangeCredentials" Header="Změnit jméno a heslo" Click="MenuChangeCredentials_Click"/>
+            <MenuItem Header="Nastavení">
+                <MenuItem Header="Změnit údaje" Click="MenuChangeCredentials_Click"/>
             </MenuItem>
-            <MenuItem Header="_Nápověda">
-                <MenuItem x:Name="menuAbout" Header="O aplikaci" Click="MenuAbout_Click"/>
+            <MenuItem Header="Nápověda">
+                <MenuItem Header="O aplikaci" Click="MenuAbout_Click"/>
             </MenuItem>
         </Menu>
 
-        <ToolBar DockPanel.Dock="Top" Padding="5">
-            <Button x:Name="btnRun" Content="▶ Spustit" FontWeight="Bold" Margin="0,0,10,0" Click="BtnRun_Click"/>
-            <Button x:Name="btnAdd" Content="➕ Přidat .exe" Margin="0,0,5,0" Click="BtnAdd_Click"/>
-            <Button x:Name="btnEdit" Content="✎ Přejmenovat/Ikona" Margin="0,0,5,0" Click="BtnEdit_Click"/>
-            <Button x:Name="btnDelete" Content="❌ Smazat" Margin="0,0,15,0" Foreground="DarkRed" Click="BtnDelete_Click"/>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10" Background="White">
+            <Button Content="➕ Přidat" Click="BtnAdd_Click" Width="80" Margin="0,0,10,0"/>
+            <Button Content="✎ Upravit" Click="BtnEdit_Click" Width="80" Margin="0,0,10,0"/>
+            <Button Content="❌ Smazat" Click="BtnDelete_Click" Width="80" Margin="0,0,10,0" Foreground="DarkRed"/>
+            <Button Content="▶ Spustit" Click="BtnRun_Click" Width="80" Margin="0,0,20,0" FontWeight="Bold"/>
 
-            <Label Content="Seřadit podle:" VerticalAlignment="Center"/>
-            <ComboBox x:Name="cmbSort" Width="120" SelectionChanged="CmbSort_SelectionChanged">
-                <ComboBoxItem Content="A-Z (Výchozí)" IsSelected="True"/>
-                <ComboBoxItem Content="Z-A"/>
-                <ComboBoxItem Content="Nejnovější"/>
+            <TextBlock Text="Řadit podle:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <ComboBox x:Name="CmbSort" Width="120" SelectionChanged="CmbSort_SelectionChanged">
+                <ComboBoxItem Content="Názvu (A-Z)" IsSelected="True"/>
+                <ComboBoxItem Content="Data přidání"/>
             </ComboBox>
-        </ToolBar>
+        </StackPanel>
 
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBarItem>
-                <TextBlock x:Name="txtStatus" Text="Připraveno. Vítejte v Nautilus Launcher."/>
-            </StatusBarItem>
-            <Separator/>
-            <StatusBarItem HorizontalAlignment="Right">
-                <TextBlock x:Name="txtAppCount" Text="Počet aplikací: 0"/>
-            </StatusBarItem>
-        </StatusBar>
-
-        <ListView x:Name="AppListView" Margin="10" MouseDoubleClick="AppListView_MouseDoubleClick">
+        <ListView x:Name="AppListView" Grid.Row="2" Grid.Column="0" Margin="10" MouseDoubleClick="AppListView_MouseDoubleClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Ikona" Width="60">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Image Source="{Binding ImagePath}" Width="32" Height="32" Margin="2"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Název aplikace" Width="300" DisplayMemberBinding="{Binding AppName}"/>
-                    <GridViewColumn Header="Cesta k souboru" Width="350" DisplayMemberBinding="{Binding FilePath}"/>
+                    <GridViewColumn Header="Název aplikace" Width="200" DisplayMemberBinding="{Binding AppName}"/>
+                    <GridViewColumn Header="Cesta k souboru" Width="300" DisplayMemberBinding="{Binding FilePath}"/>
                 </GridView>
             </ListView.View>
         </ListView>
 
-    </DockPanel>
+        <StackPanel x:Name="panelEdit" Grid.Row="2" Grid.Column="1" Margin="10" Background="#FFF0F0F0">
+            <TextBlock Text="Detaily aplikace" FontWeight="Bold" Margin="5" TextAlignment="Center"/>
+
+            <TextBlock Text="Název aplikace:" Margin="5,10,5,0"/>
+            <TextBox x:Name="txtEditName" Margin="5"/>
+
+            <TextBlock Text="Cesta k souboru (.exe):" Margin="5,10,5,0"/>
+            <TextBox x:Name="txtEditIcon" Margin="5"/>
+
+            <Button Content="Uložit změny" Margin="5,15,5,0" Padding="5" Background="LightGray"/>
+        </StackPanel>
+    </Grid>
 </Window>
