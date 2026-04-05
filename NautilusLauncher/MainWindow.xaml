@@ -61,7 +61,7 @@
             <TextBlock Text="Cesta k souboru (.exe):" Margin="5,10,5,0"/>
             <TextBox x:Name="txtEditIcon" Margin="5"/>
 
-            <Button Content="Uložit změny" Margin="5,15,5,0" Padding="5" Background="LightGray"/>
+            <Button Content="Uložit změny" Margin="5,15,5,0" Padding="5" Background="LightGray" Click="BtnSaveEdit_Click"/>
         </StackPanel>
     </Grid>
 </Window>
